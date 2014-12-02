@@ -18,6 +18,7 @@ The mailer module requires the following configuration:
         "address": <address>,
         "host": <host>,
         "port": <port>,
+        "tls": <tls>,
         "ssl": <ssl>,
         "auth": <auth>,
         "username": <username>,
@@ -30,6 +31,7 @@ Let's take a look at each field in turn:
 * `address` The main address for the busmod. Every busmod has a main address.
 * `host` Host name or ip address of the mail server instance. Defaults to `localhost`.
 * `port` Port at which the mail server is listening. Defaults to `25`.
+* `tls` If `true` then use tls, otherwise don't use tls. Default is `false`.
 * `ssl` If `true` then use ssl, otherwise don't use ssl. Default is `false`.
 * `auth` If `true` use authentication, otherwise don't use authentication. Default is `false`.
 * `username` If using authentication, the username. Default is `null`.

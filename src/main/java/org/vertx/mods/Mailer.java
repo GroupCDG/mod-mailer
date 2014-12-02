@@ -44,6 +44,7 @@ public class Mailer extends BusModBase implements Handler<Message<JsonObject>> {
   private Transport transport;
 
   private String address;
+  private boolean tls;
   private boolean ssl;
   private String host;
   private int port;
@@ -57,6 +58,7 @@ public class Mailer extends BusModBase implements Handler<Message<JsonObject>> {
   public void start() {
     super.start();
     address = getOptionalStringConfig("address", "vertx.mailer");
+    tls = getOptionalBooleanConfig("tls", false);
     ssl = getOptionalBooleanConfig("ssl", false);
     host = getOptionalStringConfig("host", "localhost");
     port = getOptionalIntConfig("port", 25);
@@ -73,6 +75,9 @@ public class Mailer extends BusModBase implements Handler<Message<JsonObject>> {
       props.put("mail.transport.protocol", "smtp");
       props.put("mail.smtp.host", host);
       props.put("mail.smtp.socketFactory.port", Integer.toString(port));
+      if(tls) {
+        props.put("mail.smtp.starttls.enable", "true");
+      }
       if (ssl) {
         props.put("mail.smtp.socketFactory.class",
           "javax.net.ssl.SSLSocketFactory");
